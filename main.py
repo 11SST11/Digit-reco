@@ -33,7 +33,7 @@ x_test = tf.keras.utils.normalize(x_test, axis=1)
 # model.fit(x_train, y_train, epochs=5)
 # model.save('hand.model')
 
-model  = tf.keras.models.load_model('hand.model')
+model = tf.keras.models.load_model('hand.model')
 
 # loss, accuracy = model.evaluate(x_test, y_test)
 # print(loss)
@@ -41,9 +41,56 @@ model  = tf.keras.models.load_model('hand.model')
 
 
 image_number = 1
-while os.path.isfile(f"Digits/{image_number}.png"):
+while os.path.isfile(f"digits/digit{image_number}.png"):
     try:
-        img = cv2.imread(f"Digits/}")
+        img = cv2.imread(f"digits/digit{image_number}.png")[:,:,0]
+        img = np.invert(np.array([img]))
+        prediction = model.predict(img)
+        print(f"This digit is probably a {np.argmax(prediction)}")
+        plt.imshow(img[0], cmap=plt.cm.binary)
+        plt.show()
+    except:
+        print("error")
+    # except Exception as e:
+    #     print(f"Error: {e}")
+    finally:
+        image_number += 1
+
+
+# image_number = 1
+#
+# while True:
+#     image_path = f"Digits/digit{image_number}.png"
+#
+#     if not os.path.isfile(image_path):
+#         break
+#
+#     try:
+#         img = cv2.imread(image_path)[:, :, 0]
+#         img = np.invert(np.array([img]))
+#         prediction = model.predict(img)
+#         print(f"This digit is probably a {np.argmax(prediction)}")
+#         plt.imshow(img[0], cmap=plt.cm.binary)
+#         plt.show()
+#     except Exception as e:
+#         print(f"Error processing {image_path}: {e}")
+#     finally:
+#         image_number += 1
+
+
+# image_number = 1
+# while os.path.isfile('digits/digit{}.png'.format(image_number)):
+#     try:
+#         img = cv2.imread('digits/digit{}.png'.format(image_number))[:,:,0]
+#         img = np.invert(np.array([img]))
+#         prediction = model.predict(img)
+#         print("The number is probably a {}".format(np.argmax(prediction)))
+#         plt.imshow(img[0], cmap=plt.cm.binary)
+#         plt.show()
+#         image_number += 1
+#     except:
+#         print("Error reading image! Proceeding with next image...")
+#         image_number += 1
 
 
 
