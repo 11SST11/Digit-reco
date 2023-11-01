@@ -18,23 +18,26 @@ x_test = tf.keras.utils.normalize(x_test, axis=1)
 
 
 
-
+#
 # model = tf.keras.models.Sequential()
 # # adding layer and flattening into one big line of 784 pixcel
 # model.add(tf.keras.layers.Flatten(input_shape=(28,28)))
 # model.add(tf.keras.layers.Dense(128, activation='relu'))
 # model.add(tf.keras.layers.Dense(128, activation='relu'))
 # model.add(tf.keras.layers.Dense(10, activation='softmax'))
-# # softmax - all neurons add up to 1
-#
-# # compiling model
+# softmax - all neurons add up to 1
+
+# compiling model
 # model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 #
-# model.fit(x_train, y_train, epochs=5)
-# model.save('hand.model')
+# model.fit(x_train, y_train, epochs=10)
+# # model.save('hand.model')
+# model.save('hand1.model')
 
-model = tf.keras.models.load_model('hand.model')
+# model = tf.keras.models.load_model('hand.model')
+model = tf.keras.models.load_model('hand1.model')
 
+#
 # loss, accuracy = model.evaluate(x_test, y_test)
 # print(loss)
 # print(accuracy)
